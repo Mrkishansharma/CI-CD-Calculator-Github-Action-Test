@@ -1,88 +1,51 @@
-// index.js
 
-//  import the crypto module
-const {randomBytes} = require('crypto')
+const crypto = require("crypto");
 
+const process = require("process");
 
-//  get a commands using process.argv
-let [,,operation,a,b] = process.argv
+const operation = process.argv[2];
 
-// complete the  function
-
-const sub = (a,b) => {
-  console.log(a-b);
-}
-
-const mult = (a,b) => {
-  console.log(a*b);
-}
-
-
-const divide = (a,b) => {
-  console.log(a/b);
-}
-
-const sin = (a) => {
-  console.log(Math.sin(a));
-}
-
-const cos = (a) => {
-  console.log(Math.cos(a));
-}
-
-const tan = (a) => {
-  console.log(Math.tan(a));
-}
-
-const random = (len) => {
-  try {
-    randomBytes(len, (err, data) => {
-      if(err) throw err
-      console.log(`${data.toString('binary')}`);
-    })
-  } catch (err) {
-    console.error('Provide length for random number generation.');
-  }
-}
-
-
-a = Number(a)
-b = Number(b)
+const a = +process.argv[3];
+const b = +process.argv[4];
 
 switch (operation) {
-  case 'add':
-    add(a,b)
-    break
+case "add":
+    console.log(a + b);
+    break;
 
-  case 'sub':
-    sub(a,b)
-    break
+case "sub":
+    console.log(a - b);
+    break;
 
-  case 'mult':
-    mult(a,b)
-    break
+case "mult":
+    console.log(a * b);
+    break;
 
-  case 'divide':
-    divide(a,b)
-    break
+case "divide":
+    console.log(a / b);
+    break;
 
-  case 'sin':
-    sin(a)
-    break
+case "sin":
+    console.log(Math.sin(a));
+    break;
 
-  case 'cos':
-    cos(a)
-    break
+case "cos":
+    console.log(Math.cos(a));
+    break;
 
-  case 'tan':
-    tan(a)
-    break
+case "tan":
+    console.log(Math.tan(a));
+    break;
 
-  case 'random':
-    random(a)
-    break
-  
+case "random":
 
-  default:
+    if (a) {
+        const data = crypto.randomBytes(a);
+        console.log(data.toString("binary"));
+    } else {
+        console.log("Provide length for random number generation.");
+    }
+    break;
+default:
     console.log("Invalid operation");
 }
